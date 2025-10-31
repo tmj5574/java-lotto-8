@@ -32,12 +32,26 @@ public class ValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    //0, 음의 정수 등
     private static Stream<Arguments> paramsForPurchaseInvalidInputs () {
         return Stream.of(
                 Arguments.of("0"),
                 Arguments.of("-5000"),
                 Arguments.of("abc")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("paramsForPurchaseInvalidInputs")
+    void 입력한_로또_번호가_올바르지_않은_경우_예외가_발생한다(String userLottoInputs) {
+        assertThatThrownBy(() -> validator.validatePurchaseAmount(userLottoInputs))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> paramsForUserLottoInputs () {
+        return Stream.of(
+                Arguments.of("1,2,3,4"),
+                Arguments.of("a,b,c"),
+                Arguments.of("0,1,3,5,46")
         );
     }
 
