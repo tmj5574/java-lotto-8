@@ -10,5 +10,9 @@ public class Application {
         int amount = input.getPurchaseAmount();
         List<Lotto> purchaseLottos = LottoService.buyLottos(amount);
         output.printLottoNumbers(purchaseLottos);
+
+        List<Integer> userLottoNumbers = input.getUserLottoNumbers();
+        int bonusNumber = input.getBonusNumber(userLottoNumbers);
+        Lotto myLotto = new Lotto(userLottoNumbers);
      }
 }
