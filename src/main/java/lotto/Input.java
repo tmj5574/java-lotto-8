@@ -3,11 +3,9 @@ package lotto;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
-    private final Validator validator;
     private final Output output;
 
-    public Input(Validator validator, Output output) {
-        this.validator = validator;
+    public Input(Output output) {
         this.output = output;
     }
 
@@ -16,7 +14,7 @@ public class Input {
             try {
                 output.printPurchasePrompt();
                 String input = Console.readLine();
-                validator.validatePurchaseAmount(input);
+                Validator.validatePurchaseAmount(input);
 
                 return Integer.parseInt(input);
 

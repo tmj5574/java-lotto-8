@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -10,4 +11,10 @@ public class Lotto {
         this.numbers = numbers;
     }
     // TODO: 추가 기능 구현
+
+    public String getLottoNumbersString() {
+        return numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(",", "[", "]"));
+    }
 }

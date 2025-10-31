@@ -3,6 +3,7 @@ package lotto;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoService {
@@ -11,7 +12,9 @@ public class LottoService {
         int lottoAmount = calculateLottoAmount(money);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoAmount; i++) {
-            lottos.add(new Lotto(getRandomNumbers()));
+            List<Integer> numbers = getRandomNumbers();
+            Collections.sort(numbers);
+            lottos.add(new Lotto(numbers));
         }
         return lottos;
     }
