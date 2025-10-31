@@ -21,13 +21,13 @@ public class ValidatorTest {
 
     @Test
     void 구매_금액이_1000원으로_나누어_떨어지지_않으면_예외가_발생한다() {
-        assertThatThrownBy(() -> validator.validatePurchaseAmount(1500))
+        assertThatThrownBy(() -> validator.validatePurchaseAmount("1500"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @MethodSource("paramsForPurchaseInvalidInputs")
-    void 구매_금액이_올바르지_않은_경우_예외가_발생한다(int purchaseAmount) {
+    void 구매_금액이_올바르지_않은_경우_예외가_발생한다(String purchaseAmount) {
         assertThatThrownBy(() -> validator.validatePurchaseAmount(purchaseAmount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -35,8 +35,9 @@ public class ValidatorTest {
     //0, 음의 정수 등
     private static Stream<Arguments> paramsForPurchaseInvalidInputs () {
         return Stream.of(
-                Arguments.of(0),
-                Arguments.of(-5000)
+                Arguments.of("0"),
+                Arguments.of("-5000"),
+                Arguments.of("abc")
         );
     }
 

@@ -4,20 +4,25 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
     private final Validator validator;
+    private final Output output;
 
-    public Input(Validator validator) {
+    public Input(Validator validator, Output output) {
         this.validator = validator;
+        this.output = output;
     }
 
     public int getPurchaseAmount() {
-        try {
-            int input = Integer.parseInt(Console.readLine());
-            validator.validatePurchaseAmount(input);
+        while (true) {
+            try {
+                output.printPurchasePrompt();
+                String input = Console.readLine();
+                validator.validatePurchaseAmount(input);
 
-            return input;
+                return Integer.parseInt(input);
 
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+            } catch (IllegalArgumentException e) {
+                output.printErrorMessage(e.getMessage());
+            }
         }
     }
 }
