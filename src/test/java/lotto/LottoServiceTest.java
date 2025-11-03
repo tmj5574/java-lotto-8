@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +55,29 @@ public class LottoServiceTest {
         assertThat(statisticsMap.get(Rank.FOURTH)).isEqualTo(1);
         assertThat(statisticsMap.get(Rank.FIFTH)).isEqualTo(2);
         assertThat(statisticsMap.size()).isEqualTo(Rank.values().length - 1); // MISS 제외
+    }
+
+    @Test
+    @DisplayName("8000원어치 로또를 구입 후 5등 1개에 당첨되었을 경우 수익률 62.5%를 반환한다.")
+    void 수익률_확인() {
+
+        //given
+        int purchaseAmount = 8000;
+
+        Map<Rank, Integer> statisticsMap = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            if (rank != Rank.MISS) {
+                statisticsMap.put(rank, 0);
+            }
+        }
+        statisticsMap.put(Rank.FIFTH, 1);
+
+        //when
+        double profitRate = LottoService.calculateProfitRate(statisticsMap, purchaseAmount);
+
+        //then
+        assertThat(profitRate).isEqualTo(62.5);
+
     }
 
 
