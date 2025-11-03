@@ -30,4 +30,8 @@ public enum Rank {
         if (matchCount == 3) return FIFTH;
         return MISS;
     }
+
+    public long getPrizeMoney() {
+        return prizeMoney;
+    }
 }

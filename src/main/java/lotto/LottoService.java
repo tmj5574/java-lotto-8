@@ -47,4 +47,16 @@ public class LottoService {
 
         return statisticsMap;
     }
+
+    public static double calculateProfitRate(Map<Rank, Integer> statisticsMap, int purchaseAmount) {
+        long totalPrizeMoney = 0;
+
+        for (Map.Entry<Rank, Integer> entry : statisticsMap.entrySet()) {
+            Rank rank = entry.getKey();
+            int count = entry.getValue();
+            totalPrizeMoney += rank.getPrizeMoney() * count;
+        }
+
+        return ((double) totalPrizeMoney / purchaseAmount) * 100.0;
+    }
 }
