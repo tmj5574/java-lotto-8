@@ -38,8 +38,6 @@ public class Output {
         System.out.println("\n당첨 통계");
         System.out.println("---");
 
-        // 1. 정해진 순서(5등~1등)대로 출력하기 위해 배열을 만듭니다.
-        // (Rank.values()는 FIRST부터 시작하므로 순서가 맞지 않습니다.)
         Rank[] displayRanks = {
                 Rank.FIFTH,  // 3개 일치
                 Rank.FOURTH, // 4개 일치
@@ -48,21 +46,11 @@ public class Output {
                 Rank.FIRST   // 6개 일치
         };
 
-        // 2. 이 순서대로 반복
         for (Rank rank : displayRanks) {
-            // 맵에서 해당 등수의 당첨 횟수를 가져옵니다. (없으면 0)
             int count = statisticsMap.getOrDefault(rank, 0);
 
-            // Enum에서 포맷팅된 문자열을 가져옵니다.
-            // "3개 일치 (5,000원) - 1개"
-            System.out.printf("%s (%s원) - %d개\n",
-                    rank.getDescription(),          // "3개 일치"
-                    rank.getFormattedPrizeMoney(),  // "5,000"
-                    count                           // 1
-            );
+            System.out.printf("%s (%s원) - %d개\n", rank.getDescription(), rank.getFormattedPrizeMoney(), count);
         }
-
-        // 3. 수익률 출력 (소수점 둘째 자리에서 반올림 -> .1f)
         System.out.printf("총 수익률은 %.1f%%입니다.\n", profitRate);
     }
 }
