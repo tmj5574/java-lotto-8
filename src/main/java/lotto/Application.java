@@ -17,5 +17,6 @@ public class Application {
         Lotto winningLotto = new Lotto(userLottoNumbers);
         Map<Rank, Integer> statisticsMap = LottoService.calculateStatistics(purchaseLottos, winningLotto, bonusNumber);
         double profitRate = LottoService.calculateProfitRate(statisticsMap, purchaseAmount);
+        output.printStatistics(statisticsMap, profitRate);
      }
 }

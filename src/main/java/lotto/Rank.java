@@ -22,6 +22,15 @@ public enum Rank {
         this.description = description;
     }
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getFormattedPrizeMoney() {
+        return NumberFormat.getNumberInstance(Locale.US).format(this.prizeMoney);
+    }
+
     public static Rank valueOf(int matchCount, boolean matchBonus) {
         if (matchCount == 6) return FIRST;
         if (matchCount == 5 && matchBonus) return SECOND;
