@@ -36,4 +36,33 @@ class LottoTest {
         //then
         assertThat(matchCount).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("입력한 보너스 번호가 로또 번호에 포함되어 있으면 true를 반환한다.")
+    void 보너스_번호_일치_여부_확인1() {
+        //given
+        Lotto myLotto = new Lotto(List.of(1,2,3,4,5,6));
+        int bonusNumber = 6;
+
+        //when
+        boolean result = myLotto.contains(bonusNumber);
+
+        //then
+        assertThat(result).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("입력한 보너스 번호가 로또 번호에 포함되어 있지 않으면 false를 반환한다.")
+    void 보너스_번호_일치_여부_확인2() {
+        //given
+        Lotto myLotto = new Lotto(List.of(1,2,3,4,5,6));
+        int bonusNumber = 7;
+
+        //when
+        boolean result = myLotto.contains(bonusNumber);
+
+        //then
+        assertThat(result).isEqualTo(false);
+    }
+
 }
