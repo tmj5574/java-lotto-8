@@ -17,4 +17,14 @@ public class Lotto {
                 .map(String::valueOf)
                 .collect(Collectors.joining(",", "[", "]"));
     }
+
+    public boolean contains(int number) {
+        return this.numbers.contains(number);
+    }
+
+    public int countMatchingNumbers(Lotto otherLotto) {
+        return (int) this.numbers.stream()
+                .filter(otherLotto::contains)
+                .count();
+    }
 }
